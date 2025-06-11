@@ -1,26 +1,34 @@
 package com.example.voca.feature.home.data
 
-import com.example.voca.core.data.model.VoiceDao
+import com.example.voca.core.data.model.VoiceNoteEntity
 import com.example.voca.feature.home.data.model.VoiceNote
+import com.example.voca.util.SyncStatus
 
-fun VoiceDao.toVoiceNote(): VoiceNote {
+fun VoiceNoteEntity.toVoiceNote(): VoiceNote {
     return VoiceNote(
         id = id,
         title = title,
+        audioFilePath = audioFilePath,
         description = description,
-        fileName = fileName,
-        filePath = filePath,
-        recordedAt = recordedAt
+        aiSummary = aiSummary,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        syncStatus = SyncStatus.valueOf(syncStatus),
+        lastSyncedAt = lastSyncedAt
     )
 }
 
-fun VoiceNote.toVoiceNoteDao(): VoiceDao {
-    return VoiceDao(
+fun VoiceNote.toVoiceNoteDao(): VoiceNoteEntity {
+    return VoiceNoteEntity(
         id = id,
-        title = title ?: "",
+        title = title,
+        audioFilePath = audioFilePath,
         description = description,
-        fileName = fileName ?: "",
-        filePath = filePath ?: "",
-        recordedAt = recordedAt ?: 0L
+        aiSummary = aiSummary,
+        createdAt = createdAt,
+        updatedAt = updatedAt,
+        syncStatus = syncStatus.name,
+        lastSyncedAt = lastSyncedAt,
+        serverVersion = 0,
     )
 }

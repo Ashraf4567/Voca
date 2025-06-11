@@ -12,7 +12,7 @@ import java.io.File
 
 class VoiceNotesRepositoryImpl(
     private val dao: VoiceNoteDao,
-    private val context: Context
+    context: Context
 ): VoiceNotesRepository {
 
     private val voiceDir = File(context.filesDir, "voice")
