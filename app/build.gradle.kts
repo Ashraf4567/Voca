@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -18,6 +20,18 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val localProperties = Properties()
+        val localPropertiesFile = File("local.properties")
+        if (localPropertiesFile.exists()) {
+            localPropertiesFile.inputStream().use {
+                localProperties.load(it)
+            }
+        }
+        val supabaseUrl = localProperties.getProperty("SUPABASE_URL")
+        val supabaseKey = localProperties.getProperty("SUPABASE_KEY")
+        buildConfigField("String", "SUPABASE_URL", supabaseUrl)
+        buildConfigField("String", "SUPABASE_KEY", supabaseKey)
     }
 
     buildTypes {
@@ -37,6 +51,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 }
@@ -70,4 +85,14 @@ dependencies {
     implementation("androidx.room:room-ktx:$room_version")
 
     implementation("androidx.navigation:navigation-compose:2.9.0")
+
+    // supabase
+    implementation(platform(libs.supabase.bom))
+    implementation(libs.auth.kt)
+    implementation(libs.ktor.client.okhttp)
+
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
+
 }

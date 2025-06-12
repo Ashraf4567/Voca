@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.voca.core.media.recorder.AudioRecorder
 import com.example.voca.feature.home.data.repo.VoiceNotesRepository
 import com.example.voca.feature.home.data.model.VoiceNote
+import com.example.voca.util.SyncStatus
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -50,8 +51,10 @@ class HomeViewModel(
                     VoiceNote(
                         title = "test",
                         description = "test",
-                        fileName = file.name,
-                        filePath = file.absolutePath,
+                        audioFilePath = file.absolutePath,
+                        createdAt = System.currentTimeMillis(),
+                        updatedAt = System.currentTimeMillis(),
+                        syncStatus = SyncStatus.PENDING_UPDATE,
                     )
                 )
             }
