@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 object HomeScreen
 
 @Serializable
+object LoginScreen
+
+@Serializable
 data class AddRecordScreen(
     val recordPath: String
 )

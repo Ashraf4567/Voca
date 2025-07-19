@@ -30,8 +30,10 @@ android {
         }
         val supabaseUrl = localProperties.getProperty("SUPABASE_URL")
         val supabaseKey = localProperties.getProperty("SUPABASE_KEY")
+        val googleServerClientId = localProperties.getProperty("GOOGLE_SERVER_CLIENT_ID")
         buildConfigField("String", "SUPABASE_URL", supabaseUrl)
         buildConfigField("String", "SUPABASE_KEY", supabaseKey)
+        buildConfigField("String", "GOOGLE_SERVER_CLIENT_ID", googleServerClientId)
     }
 
     buildTypes {
@@ -94,5 +96,8 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.googleid)
+
+    //splash screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
 }
